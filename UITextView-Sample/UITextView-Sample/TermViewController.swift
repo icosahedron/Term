@@ -30,10 +30,14 @@ class TermViewController: UIViewController, UITextViewDelegate {
         // equal to the textView in bottom and trailing.  Reversed, these go beyond the bottom and trailing
         // edges.
         let guide = view.safeAreaLayoutGuide
+        self.view.keyboardLayoutGuide.usesSafeArea = false
+
         NSLayoutConstraint.activate([
             self.textView.topAnchor.constraint(equalToSystemSpacingBelow: guide.topAnchor, multiplier: 1.0),
             self.textView.leadingAnchor.constraint(equalToSystemSpacingAfter: guide.leadingAnchor, multiplier: 1.0),
-            guide.bottomAnchor.constraint(equalToSystemSpacingBelow: self.textView.bottomAnchor, multiplier: 1.0),
+//            guide.bottomAnchor.constraint(equalToSystemSpacingBelow: self.textView.bottomAnchor, multiplier: 1.0),
+//            self.textView.bottomAnchor.constraint(equalTo: self.view.keyboardLayoutGuide.topAnchor),
+            self.view.keyboardLayoutGuide.topAnchor.constraint(equalToSystemSpacingBelow: self.textView.bottomAnchor, multiplier: 1.0),
             guide.trailingAnchor.constraint(equalToSystemSpacingAfter: self.textView.trailingAnchor, multiplier: 1.0)
             ])
     }
@@ -41,19 +45,19 @@ class TermViewController: UIViewController, UITextViewDelegate {
     override func viewWillAppear(_ animated : Bool) {
         super.viewWillAppear(animated)
         
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(handleKeyboardWillShowNotification),
-                                       name: UIResponder.keyboardWillShowNotification, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(handleKeyboardWillHideNotification),
-                                       name: UIResponder.keyboardWillHideNotification, object: nil)
+//        let notificationCenter = NotificationCenter.default
+//        notificationCenter.addObserver(self, selector: #selector(handleKeyboardWillShowNotification),
+//                                       name: UIResponder.keyboardWillShowNotification, object: nil)
+//        notificationCenter.addObserver(self, selector: #selector(handleKeyboardWillHideNotification),
+//                                       name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        notificationCenter.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+//        let notificationCenter = NotificationCenter.default
+//        notificationCenter.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+//        notificationCenter.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func didReceiveMemoryWarning() {

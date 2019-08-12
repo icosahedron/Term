@@ -14,6 +14,7 @@
 		32A3271422FF3BDC007DFF50 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32A3271222FF3BDC007DFF50 /* LaunchScreen.storyboard */; };
 		32A3271F22FF3BDC007DFF50 /* UITextView_SampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A3271E22FF3BDC007DFF50 /* UITextView_SampleTests.swift */; };
 		32A3272A2300DD82007DFF50 /* Editor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32A327292300DD82007DFF50 /* Editor.storyboard */; };
+		32A3273023012AEB007DFF50 /* Keyboard+LayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A3272F23012AEB007DFF50 /* Keyboard+LayoutGuide.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		32A3271E22FF3BDC007DFF50 /* UITextView_SampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView_SampleTests.swift; sourceTree = "<group>"; };
 		32A3272022FF3BDC007DFF50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32A327292300DD82007DFF50 /* Editor.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Editor.storyboard; sourceTree = "<group>"; };
+		32A3272F23012AEB007DFF50 /* Keyboard+LayoutGuide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Keyboard+LayoutGuide.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 		32A3270822FF3BDB007DFF50 /* UITextView-Sample */ = {
 			isa = PBXGroup;
 			children = (
+				32A3272F23012AEB007DFF50 /* Keyboard+LayoutGuide.swift */,
 				32A3270922FF3BDB007DFF50 /* AppDelegate.swift */,
 				32A3270B22FF3BDB007DFF50 /* TermViewController.swift */,
 				32A3270D22FF3BDB007DFF50 /* Main.storyboard */,
@@ -203,6 +206,7 @@
 			files = (
 				32A3270C22FF3BDB007DFF50 /* TermViewController.swift in Sources */,
 				32A3270A22FF3BDB007DFF50 /* AppDelegate.swift in Sources */,
+				32A3273023012AEB007DFF50 /* Keyboard+LayoutGuide.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
