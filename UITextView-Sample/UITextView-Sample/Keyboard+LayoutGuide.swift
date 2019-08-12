@@ -4,7 +4,8 @@
 //
 //  Created by Sacha DSO on 14/11/2017.
 //  Copyright © 2017 freshos. All rights reserved.
-//
+//  Licensed under MIT License
+//  https://github.com/freshOS/KeyboardLayoutGuide/blob/master/LICENSE
 
 import UIKit
 

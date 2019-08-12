@@ -35,29 +35,9 @@ class TermViewController: UIViewController, UITextViewDelegate {
         NSLayoutConstraint.activate([
             self.textView.topAnchor.constraint(equalToSystemSpacingBelow: guide.topAnchor, multiplier: 1.0),
             self.textView.leadingAnchor.constraint(equalToSystemSpacingAfter: guide.leadingAnchor, multiplier: 1.0),
-//            guide.bottomAnchor.constraint(equalToSystemSpacingBelow: self.textView.bottomAnchor, multiplier: 1.0),
-//            self.textView.bottomAnchor.constraint(equalTo: self.view.keyboardLayoutGuide.topAnchor),
             self.view.keyboardLayoutGuide.topAnchor.constraint(equalToSystemSpacingBelow: self.textView.bottomAnchor, multiplier: 1.0),
             guide.trailingAnchor.constraint(equalToSystemSpacingAfter: self.textView.trailingAnchor, multiplier: 1.0)
             ])
-    }
-
-    override func viewWillAppear(_ animated : Bool) {
-        super.viewWillAppear(animated)
-        
-//        let notificationCenter = NotificationCenter.default
-//        notificationCenter.addObserver(self, selector: #selector(handleKeyboardWillShowNotification),
-//                                       name: UIResponder.keyboardWillShowNotification, object: nil)
-//        notificationCenter.addObserver(self, selector: #selector(handleKeyboardWillHideNotification),
-//                                       name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-//        let notificationCenter = NotificationCenter.default
-//        notificationCenter.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-//        notificationCenter.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -90,44 +70,6 @@ class TermViewController: UIViewController, UITextViewDelegate {
             firstLayout = false
             detectOrientation()
         }
-    }
-    
-    // MARK: - Keyboard notification
-    
-    @objc func handleKeyboardWillShowNotification(_ notification: Notification) {
-        print("keyboard will show")
-        keyboardWillChangeFrameWithNotification(notification, showsKeyboard: true)
-    }
-    
-    @objc func handleKeyboardWillHideNotification(_ notification: Notification) {
-        print("keyboard will hide")
-        keyboardWillChangeFrameWithNotification(notification, showsKeyboard: false)
-    }
-    
-    func keyboardWillChangeFrameWithNotification(_ notification: Notification, showsKeyboard: Bool) {
-        let userInfo = (notification as NSNotification).userInfo!
-        let durationInfo = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber) ?? NSNumber()
-        let animationDuration: TimeInterval = durationInfo.doubleValue
-        var viewHeight = view.bounds.height
-        let keyboardEndFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect) ?? CGRect.zero
-        let withHardwareKeyboard = keyboardEndFrame.maxY > self.view.bounds.height
-        if showsKeyboard {
-//            if withHardwareKeyboard {
-//                viewHeight -= toolBarHeight
-//            } else {
-                let keyboardHeight = keyboardEndFrame.height
-                viewHeight -= keyboardHeight
-//            }
-        }
-
-        print("textView height = \(viewHeight)")
-        UIView.animate(
-            withDuration: animationDuration,
-            delay: 0.0,
-            options: UIView.AnimationOptions.beginFromCurrentState,
-            animations: { [weak self] in
-                self?.textView.frame.size.height = viewHeight
-            }, completion: nil)
     }
 }
 
