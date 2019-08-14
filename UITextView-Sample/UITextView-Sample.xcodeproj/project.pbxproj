@@ -15,6 +15,7 @@
 		32A3271F22FF3BDC007DFF50 /* UITextView_SampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A3271E22FF3BDC007DFF50 /* UITextView_SampleTests.swift */; };
 		32A3272A2300DD82007DFF50 /* Editor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32A327292300DD82007DFF50 /* Editor.storyboard */; };
 		32A3273023012AEB007DFF50 /* Keyboard+LayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A3272F23012AEB007DFF50 /* Keyboard+LayoutGuide.swift */; };
+		32A495062303DBDA000C949F /* Menlo.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 32A495052303DBDA000C949F /* Menlo.ttc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		32A3272022FF3BDC007DFF50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32A327292300DD82007DFF50 /* Editor.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Editor.storyboard; sourceTree = "<group>"; };
 		32A3272F23012AEB007DFF50 /* Keyboard+LayoutGuide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Keyboard+LayoutGuide.swift"; sourceTree = "<group>"; };
+		32A495052303DBDA000C949F /* Menlo.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Menlo.ttc; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 		32A3270822FF3BDB007DFF50 /* UITextView-Sample */ = {
 			isa = PBXGroup;
 			children = (
+				32A495042303D505000C949F /* Fonts */,
 				32A3272F23012AEB007DFF50 /* Keyboard+LayoutGuide.swift */,
 				32A3270922FF3BDB007DFF50 /* AppDelegate.swift */,
 				32A3270B22FF3BDB007DFF50 /* TermViewController.swift */,
@@ -100,6 +103,14 @@
 				32A3272022FF3BDC007DFF50 /* Info.plist */,
 			);
 			path = "UITextView-SampleTests";
+			sourceTree = "<group>";
+		};
+		32A495042303D505000C949F /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				32A495052303DBDA000C949F /* Menlo.ttc */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,6 +195,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				32A3271422FF3BDC007DFF50 /* LaunchScreen.storyboard in Resources */,
+				32A495062303DBDA000C949F /* Menlo.ttc in Resources */,
 				32A3271122FF3BDC007DFF50 /* Assets.xcassets in Resources */,
 				32A3270F22FF3BDB007DFF50 /* Main.storyboard in Resources */,
 				32A3272A2300DD82007DFF50 /* Editor.storyboard in Resources */,

@@ -19,6 +19,10 @@ class TermViewController: UIViewController, UITextViewDelegate {
         self.textView = UITextView(frame: self.view.bounds)
         self.textView.delegate = self
         self.textView.translatesAutoresizingMaskIntoConstraints = false
+        
+        var defaultFont = UIFont(name: "Menlo", size: 20.0)
+        self.textView.font = defaultFont
+        
         self.view.addSubview(textView)
         // this sets the text view to be fully within the safe area of the view controller
         // these resources helped a lot
