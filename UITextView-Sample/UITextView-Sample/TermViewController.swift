@@ -38,6 +38,8 @@ class TermViewController: UIViewController, UITextViewDelegate {
             self.view.keyboardLayoutGuide.topAnchor.constraint(equalToSystemSpacingBelow: self.textView.bottomAnchor, multiplier: 1.0),
             guide.trailingAnchor.constraint(equalToSystemSpacingAfter: self.textView.trailingAnchor, multiplier: 1.0)
             ])
+        
+        self.textView.resignFirstResponder()
     }
     
     override func didReceiveMemoryWarning() {
@@ -58,10 +60,6 @@ class TermViewController: UIViewController, UITextViewDelegate {
         } else {
             print("Portrait")
         }
-    }
-    
-    override func viewWillLayoutSubviews() {
-        
     }
     
     override func viewDidLayoutSubviews() {
