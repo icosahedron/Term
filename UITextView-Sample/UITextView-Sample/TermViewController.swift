@@ -50,6 +50,19 @@ class TermViewController: UIViewController, UITextViewDelegate {
         super.didReceiveMemoryWarning()
     }
     
+      // MARK: - keyboard
+    internal func textView(_: UITextView, shouldChangeTextIn range: NSRange, replacementText newText: String) -> Bool {
+//           let cstr = newText.utf8CString
+//           cstr.withUnsafeBytes { ptr in
+//               let cstr = UnsafeRawBufferPointer(ptr).bindMemory(to: Int8.self)
+//               let len = strlen(cstr.baseAddress!)
+//               let utf8 = UnsafeRawBufferPointer(cstr).bindMemory(to: UInt8.self)
+//               output!.write(utf8.baseAddress!, maxLength: len)
+//           }
+        print(newText)
+        return true
+    }
+
     // MARK: - Orientation/Resize calculation
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
