@@ -9,7 +9,7 @@
 import UIKit
 
 class TermViewController: UIViewController, UIScrollViewDelegate {
-
+    
     var scrollView : UIScrollView!
     var termView : TermTextView!
     var firstLayout : Bool = true
@@ -18,22 +18,29 @@ class TermViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
                 
         let defaultFont = UIFont(name: "Menlo", size: 14.0)
-//        scrollView = UIScrollView(frame: self.view.bounds)
-//        scrollView.backgroundColor = UIColor.green
-//        scrollView.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.flexibleWidth.rawValue | UIView.AutoresizingMask.flexibleHeight.rawValue) // UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-//        self.view.addSubview(scrollView)
         
-        termView = TermTextView(frame: self.view.bounds, font: defaultFont!)
+        // https://www.appcoda.com/uiscrollview-introduction/
+        // UIScrollView introduction
+        scrollView = UIScrollView(frame: view.bounds)
+        scrollView.backgroundColor = UIColor.green
+        scrollView.contentSize = view.bounds.size
+        scrollView.contentOffset = CGPoint.zero
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+
+        termView = TermTextView(frame: view.bounds, font: defaultFont!)
         termView.backgroundColor = UIColor.lightGray
-//        termView.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.flexibleWidth.rawValue | UIView.AutoresizingMask.flexibleHeight.rawValue) // UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        termView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(termView)
+        termView.translatesAutoresizingMaskIntoConstraints = true
+        termView.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.flexibleWidth.rawValue | UIView.AutoresizingMask.flexibleHeight.rawValue)
+//        termView.translatesAutoresizingMaskIntoConstraints = false
+
+        // https://stackoverflow.com/questions/5478969/uiscrollview-how-to-draw-content-on-demand
+        // talks about how to use a CATiledLayer to draw content on demand, similar to a UITableView does with rows
+        // https://medium.com/@ssamadgh/designing-apps-with-scroll-views-part-iii-optimizing-with-tiles-3875535b4114
+        scrollView.addSubview(termView)
+        view.addSubview(scrollView)
+//        view.addSubview(termView)
         
-        let style = NSMutableParagraphStyle()
-        style.lineBreakMode = .byCharWrapping
-//        textView.attributedText = NSAttributedString(string: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-//                                                     attributes:[NSAttributedString.Key.font : defaultFont!, NSAttributedString.Key.paragraphStyle : style])
-        // this sets the text view to be fully within the safe area of the view controller
+        // this sets the scroll view to be fully within the safe area of the view controller
         // these resources helped a lot
         // https://useyourloaf.com/blog/safe-area-layout-guide/
         // https://developer.apple.com/documentation/uikit/nslayoutanchor
@@ -43,42 +50,45 @@ class TermViewController: UIViewController, UIScrollViewDelegate {
         // equal to the textView in bottom and trailing.  Reversed, these go beyond the bottom and trailing
         // edges.
         let guide = view.safeAreaLayoutGuide
-        self.view.keyboardLayoutGuide.usesSafeArea = false
+        view.keyboardLayoutGuide.usesSafeArea = false
 
+        // for the scrollview layout
         NSLayoutConstraint.activate([
-            self.termView.topAnchor.constraint(equalToSystemSpacingBelow: guide.topAnchor, multiplier: 1.0),
-            self.termView.leadingAnchor.constraint(equalToSystemSpacingAfter: guide.leadingAnchor, multiplier: 1.0),
-            self.view.keyboardLayoutGuide.topAnchor.constraint(equalToSystemSpacingBelow: self.termView.bottomAnchor, multiplier: 1.0),
-            guide.trailingAnchor.constraint(equalToSystemSpacingAfter: self.termView.trailingAnchor, multiplier: 1.0)
+            scrollView.topAnchor.constraint(equalToSystemSpacingBelow: guide.topAnchor, multiplier: 1.0),
+            scrollView.leadingAnchor.constraint(equalToSystemSpacingAfter: guide.leadingAnchor, multiplier: 1.0),
+            view.keyboardLayoutGuide.topAnchor.constraint(equalToSystemSpacingBelow: self.scrollView.bottomAnchor, multiplier: 1.0),
+            guide.trailingAnchor.constraint(equalToSystemSpacingAfter: self.scrollView.trailingAnchor, multiplier: 1.0)
             ])
-        
-        self.termView.resignFirstResponder()
+
+//        NSLayoutConstraint.activate([
+//            termView.topAnchor.constraint(equalToSystemSpacingBelow: guide.topAnchor, multiplier: 1.0),
+//            termView.leadingAnchor.constraint(equalToSystemSpacingAfter: guide.leadingAnchor, multiplier: 1.0),
+//            view.keyboardLayoutGuide.topAnchor.constraint(equalToSystemSpacingBelow: self.termView.bottomAnchor, multiplier: 1.0),
+//            guide.trailingAnchor.constraint(equalToSystemSpacingAfter: self.termView.trailingAnchor, multiplier: 1.0)
+//            ])
+
+//        self.termView.becomeFirstResponder()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        termView.becomeFirstResponder()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-      // MARK: - keyboard
-    internal func textView(_: UITextView, shouldChangeTextIn range: NSRange, replacementText newText: String) -> Bool {
-//           let cstr = newText.utf8CString
-//           cstr.withUnsafeBytes { ptr in
-//               let cstr = UnsafeRawBufferPointer(ptr).bindMemory(to: Int8.self)
-//               let len = strlen(cstr.baseAddress!)
-//               let utf8 = UnsafeRawBufferPointer(cstr).bindMemory(to: UInt8.self)
-//               output!.write(utf8.baseAddress!, maxLength: len)
-//           }
-//        print(newText)
-        return true
-    }
-
     // MARK: - Orientation/Resize calculation
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        print("Will Transition to size \(size) from super view size \(self.view.frame.size)")
+        print("Will Transition to size \(size) from super view size \(view.frame.size)")
         detectOrientation()
-        super.view.layoutSubviews()
+        view.layoutSubviews()
+        scrollView.contentSize = size
+        scrollView.setNeedsLayout()
+        scrollView.setNeedsDisplay()
         termView.setNeedsDisplay()
         termView.resize(size)
     }

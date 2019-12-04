@@ -12,30 +12,53 @@ import CoreText
 
 /// A monospaced coordinate system view of text suitable for terminal emulation
 
-class TermTextView : UIView {
-        
-    var _dim : CGSize
-    var _scale : CGSize
-    var _margins : CGSize
-    var _cursor : CGPoint
-    var _font : UIFont
-//    var _textFramesetter : CTFramesetter
-//    var _textFrame : CTFrame
-//    var _measure : UILabel
+class TermTextView : UIView, UIKeyInput {
+    
+    private var _dim : CGSize
+    private var _scale : CGSize
+    private var _margins : CGSize
+    private var _cursor : CGPoint
+    private var _font : UIFont
+    
+    public var hasText: Bool = false;
+    
+    public override var canBecomeFirstResponder : Bool {
+        get { print("canBecomeFirstResponder"); return true }
+    }
+    
+    public override var canResignFirstResponder: Bool {
+        get { print("canResignFirstResponder"); return true }
+    }
     
     public init(frame: CGRect, font : UIFont) {
         
-        self._cursor = CGPoint(x:0, y:0)
-        self._dim = CGSize.zero
-        self._scale = CGSize.zero
-        self._font = font
-        self._margins = CGSize.zero
+        _cursor = CGPoint(x:0, y:0)
+        _dim = CGSize.zero
+        _scale = CGSize.zero
+        _font = font
+        _margins = CGSize.zero
         
         super.init(frame: frame)
         
-        self.backgroundColor = UIColor.blue
-        self.layer.isGeometryFlipped = true
-        self.recalcDimensions()
+        backgroundColor = UIColor.blue
+//        layer.isGeometryFlipped = true
+        recalcDimensions()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tap))
+        tapGesture.numberOfTouchesRequired = 1
+        tapGesture.numberOfTapsRequired = 1
+        addGestureRecognizer(tapGesture)
+        
+        isUserInteractionEnabled = true;
+    }
+    
+    @objc
+    public func tap(_ r : UIGestureRecognizer) {
+        print("tap")
+        let can = becomeFirstResponder()
+        print("becomeFirstResponder = \(can)")
+        let first = isFirstResponder
+        print("isFirstResponder = \(first)")
     }
     
     required init?(coder: NSCoder) {
@@ -55,7 +78,9 @@ class TermTextView : UIView {
     }
     
     public var size : CGSize {
-        return self._dim
+        get {
+            return self._dim
+        }
     }
     
     public var font : UIFont {
@@ -68,8 +93,7 @@ class TermTextView : UIView {
         }
     }
     
-    private func recalcDimensions(_ newBounds: CGSize? = nil)
-    {
+    private func recalcDimensions(_ newBounds: CGSize? = nil) {
         let bounds = newBounds ?? self.bounds.size
         let fontAttributes = [NSAttributedString.Key.font: self._font]
         self._scale = ("W" as NSString).size(withAttributes: fontAttributes)
@@ -79,10 +103,11 @@ class TermTextView : UIView {
         let heightDiff = (bounds.height - self._dim.height * self._scale.height) / 2.0
         self._margins = CGSize(width: widthDiff, height: heightDiff)
         print("\(self._dim.width) x \(self._dim.height)")
+        let first = self.isFirstResponder
+        print("isFirstResponder = \(first)")
     }
     
-    private func drawString(x: Int, y: Int, str: String)
-    {
+    private func drawString(x: Int, y: Int, str: String) {
         let string = NSAttributedString(string: str, attributes: [NSAttributedString.Key.font: font])
         let pt_x = CGFloat(x) * self._scale.width + self._margins.width
         let pt_y = CGFloat(y) * self._scale.height + self._margins.height
@@ -96,9 +121,9 @@ class TermTextView : UIView {
         let context = UIGraphicsGetCurrentContext()!
         UIGraphicsPushContext(context)
         
-        context.textMatrix = .identity
-        context.translateBy(x: 0, y: bounds.size.height)
-        context.scaleBy(x: 1.0, y: -1.0)
+//        context.textMatrix = .identity
+//        context.translateBy(x: 0, y: bounds.size.height)
+//        context.scaleBy(x: 1.0, y: -1.0)
         
 //        string.draw(at: CGPoint(x: 0, y: 0))
         drawString(x: 1, y: 1, str: "Hello, world")
@@ -106,5 +131,14 @@ class TermTextView : UIView {
         UIGraphicsPopContext()
     }
     
+    public func insertText(_ text: String) {
+        print(text)
+        return
+    }
+    
+    public func deleteBackward() {
+        print("deleteBackward")
+        return
+    }
 }
 
