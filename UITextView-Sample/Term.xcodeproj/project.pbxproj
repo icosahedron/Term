@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		321D5D612392F73F00385628 /* TermTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321D5D602392F73F00385628 /* TermTextView.swift */; };
 		32A3270A22FF3BDB007DFF50 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A3270922FF3BDB007DFF50 /* AppDelegate.swift */; };
 		32A3270C22FF3BDB007DFF50 /* TermViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A3270B22FF3BDB007DFF50 /* TermViewController.swift */; };
 		32A3270F22FF3BDB007DFF50 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32A3270D22FF3BDB007DFF50 /* Main.storyboard */; };
 		32A3271122FF3BDC007DFF50 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32A3271022FF3BDC007DFF50 /* Assets.xcassets */; };
 		32A3271422FF3BDC007DFF50 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32A3271222FF3BDC007DFF50 /* LaunchScreen.storyboard */; };
-		32A3271F22FF3BDC007DFF50 /* UITextView_SampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A3271E22FF3BDC007DFF50 /* UITextView_SampleTests.swift */; };
+		32A3271F22FF3BDC007DFF50 /* TermTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A3271E22FF3BDC007DFF50 /* TermTests.swift */; };
 		32A3272A2300DD82007DFF50 /* Editor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32A327292300DD82007DFF50 /* Editor.storyboard */; };
 		32A3273023012AEB007DFF50 /* Keyboard+LayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A3272F23012AEB007DFF50 /* Keyboard+LayoutGuide.swift */; };
 		32A495062303DBDA000C949F /* Menlo.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 32A495052303DBDA000C949F /* Menlo.ttc */; };
@@ -29,15 +30,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		32A3270622FF3BDB007DFF50 /* UITextView-Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UITextView-Sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		321D5D602392F73F00385628 /* TermTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermTextView.swift; sourceTree = "<group>"; };
+		32A3270622FF3BDB007DFF50 /* Term.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Term.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32A3270922FF3BDB007DFF50 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		32A3270B22FF3BDB007DFF50 /* TermViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermViewController.swift; sourceTree = "<group>"; };
 		32A3270E22FF3BDB007DFF50 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		32A3271022FF3BDC007DFF50 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		32A3271322FF3BDC007DFF50 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		32A3271522FF3BDC007DFF50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		32A3271A22FF3BDC007DFF50 /* UITextView-SampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "UITextView-SampleTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		32A3271E22FF3BDC007DFF50 /* UITextView_SampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView_SampleTests.swift; sourceTree = "<group>"; };
+		32A3271A22FF3BDC007DFF50 /* TermTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TermTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		32A3271E22FF3BDC007DFF50 /* TermTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermTests.swift; sourceTree = "<group>"; };
 		32A3272022FF3BDC007DFF50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32A327292300DD82007DFF50 /* Editor.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Editor.storyboard; sourceTree = "<group>"; };
 		32A3272F23012AEB007DFF50 /* Keyboard+LayoutGuide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Keyboard+LayoutGuide.swift"; sourceTree = "<group>"; };
@@ -65,8 +67,8 @@
 		32A326FD22FF3BDB007DFF50 = {
 			isa = PBXGroup;
 			children = (
-				32A3270822FF3BDB007DFF50 /* UITextView-Sample */,
-				32A3271D22FF3BDC007DFF50 /* UITextView-SampleTests */,
+				32A3270822FF3BDB007DFF50 /* Term */,
+				32A3271D22FF3BDC007DFF50 /* Term-Tests */,
 				32A3270722FF3BDB007DFF50 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -74,35 +76,36 @@
 		32A3270722FF3BDB007DFF50 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				32A3270622FF3BDB007DFF50 /* UITextView-Sample.app */,
-				32A3271A22FF3BDC007DFF50 /* UITextView-SampleTests.xctest */,
+				32A3270622FF3BDB007DFF50 /* Term.app */,
+				32A3271A22FF3BDC007DFF50 /* TermTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		32A3270822FF3BDB007DFF50 /* UITextView-Sample */ = {
+		32A3270822FF3BDB007DFF50 /* Term */ = {
 			isa = PBXGroup;
 			children = (
 				32A495042303D505000C949F /* Fonts */,
 				32A3272F23012AEB007DFF50 /* Keyboard+LayoutGuide.swift */,
 				32A3270922FF3BDB007DFF50 /* AppDelegate.swift */,
 				32A3270B22FF3BDB007DFF50 /* TermViewController.swift */,
+				321D5D602392F73F00385628 /* TermTextView.swift */,
 				32A3270D22FF3BDB007DFF50 /* Main.storyboard */,
 				32A3271022FF3BDC007DFF50 /* Assets.xcassets */,
 				32A3271222FF3BDC007DFF50 /* LaunchScreen.storyboard */,
 				32A3271522FF3BDC007DFF50 /* Info.plist */,
 				32A327292300DD82007DFF50 /* Editor.storyboard */,
 			);
-			path = "UITextView-Sample";
+			path = Term;
 			sourceTree = "<group>";
 		};
-		32A3271D22FF3BDC007DFF50 /* UITextView-SampleTests */ = {
+		32A3271D22FF3BDC007DFF50 /* Term-Tests */ = {
 			isa = PBXGroup;
 			children = (
-				32A3271E22FF3BDC007DFF50 /* UITextView_SampleTests.swift */,
+				32A3271E22FF3BDC007DFF50 /* TermTests.swift */,
 				32A3272022FF3BDC007DFF50 /* Info.plist */,
 			);
-			path = "UITextView-SampleTests";
+			path = "Term-Tests";
 			sourceTree = "<group>";
 		};
 		32A495042303D505000C949F /* Fonts */ = {
@@ -116,9 +119,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		32A3270522FF3BDB007DFF50 /* UITextView-Sample */ = {
+		32A3270522FF3BDB007DFF50 /* Term */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 32A3272322FF3BDC007DFF50 /* Build configuration list for PBXNativeTarget "UITextView-Sample" */;
+			buildConfigurationList = 32A3272322FF3BDC007DFF50 /* Build configuration list for PBXNativeTarget "Term" */;
 			buildPhases = (
 				32A3270222FF3BDB007DFF50 /* Sources */,
 				32A3270322FF3BDB007DFF50 /* Frameworks */,
@@ -128,14 +131,14 @@
 			);
 			dependencies = (
 			);
-			name = "UITextView-Sample";
+			name = Term;
 			productName = "UITextView-Sample";
-			productReference = 32A3270622FF3BDB007DFF50 /* UITextView-Sample.app */;
+			productReference = 32A3270622FF3BDB007DFF50 /* Term.app */;
 			productType = "com.apple.product-type.application";
 		};
-		32A3271922FF3BDC007DFF50 /* UITextView-SampleTests */ = {
+		32A3271922FF3BDC007DFF50 /* TermTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 32A3272622FF3BDC007DFF50 /* Build configuration list for PBXNativeTarget "UITextView-SampleTests" */;
+			buildConfigurationList = 32A3272622FF3BDC007DFF50 /* Build configuration list for PBXNativeTarget "TermTests" */;
 			buildPhases = (
 				32A3271622FF3BDC007DFF50 /* Sources */,
 				32A3271722FF3BDC007DFF50 /* Frameworks */,
@@ -146,9 +149,9 @@
 			dependencies = (
 				32A3271C22FF3BDC007DFF50 /* PBXTargetDependency */,
 			);
-			name = "UITextView-SampleTests";
+			name = TermTests;
 			productName = "UITextView-SampleTests";
-			productReference = 32A3271A22FF3BDC007DFF50 /* UITextView-SampleTests.xctest */;
+			productReference = 32A3271A22FF3BDC007DFF50 /* TermTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -170,7 +173,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 32A3270122FF3BDB007DFF50 /* Build configuration list for PBXProject "UITextView-Sample" */;
+			buildConfigurationList = 32A3270122FF3BDB007DFF50 /* Build configuration list for PBXProject "Term" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -183,8 +186,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				32A3270522FF3BDB007DFF50 /* UITextView-Sample */,
-				32A3271922FF3BDC007DFF50 /* UITextView-SampleTests */,
+				32A3270522FF3BDB007DFF50 /* Term */,
+				32A3271922FF3BDC007DFF50 /* TermTests */,
 			);
 		};
 /* End PBXProject section */
@@ -217,6 +220,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				32A3270C22FF3BDB007DFF50 /* TermViewController.swift in Sources */,
+				321D5D612392F73F00385628 /* TermTextView.swift in Sources */,
 				32A3270A22FF3BDB007DFF50 /* AppDelegate.swift in Sources */,
 				32A3273023012AEB007DFF50 /* Keyboard+LayoutGuide.swift in Sources */,
 			);
@@ -226,7 +230,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32A3271F22FF3BDC007DFF50 /* UITextView_SampleTests.swift in Sources */,
+				32A3271F22FF3BDC007DFF50 /* TermTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,7 +239,7 @@
 /* Begin PBXTargetDependency section */
 		32A3271C22FF3BDC007DFF50 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 32A3270522FF3BDB007DFF50 /* UITextView-Sample */;
+			target = 32A3270522FF3BDB007DFF50 /* Term */;
 			targetProxy = 32A3271B22FF3BDC007DFF50 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -382,12 +386,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DHHJAAR6WK;
-				INFOPLIST_FILE = "UITextView-Sample/Info.plist";
+				INFOPLIST_FILE = Term/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "co.werks.UITextView-Sample";
+				PRODUCT_BUNDLE_IDENTIFIER = co.werks.term;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -400,12 +404,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DHHJAAR6WK;
-				INFOPLIST_FILE = "UITextView-Sample/Info.plist";
+				INFOPLIST_FILE = Term/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "co.werks.UITextView-Sample";
+				PRODUCT_BUNDLE_IDENTIFIER = co.werks.term;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -429,7 +433,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UITextView-Sample.app/UITextView-Sample";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Term.app/Term";
 			};
 			name = Debug;
 		};
@@ -450,14 +454,14 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UITextView-Sample.app/UITextView-Sample";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Term.app/Term";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		32A3270122FF3BDB007DFF50 /* Build configuration list for PBXProject "UITextView-Sample" */ = {
+		32A3270122FF3BDB007DFF50 /* Build configuration list for PBXProject "Term" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				32A3272122FF3BDC007DFF50 /* Debug */,
@@ -466,7 +470,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		32A3272322FF3BDC007DFF50 /* Build configuration list for PBXNativeTarget "UITextView-Sample" */ = {
+		32A3272322FF3BDC007DFF50 /* Build configuration list for PBXNativeTarget "Term" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				32A3272422FF3BDC007DFF50 /* Debug */,
@@ -475,7 +479,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		32A3272622FF3BDC007DFF50 /* Build configuration list for PBXNativeTarget "UITextView-SampleTests" */ = {
+		32A3272622FF3BDC007DFF50 /* Build configuration list for PBXNativeTarget "TermTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				32A3272722FF3BDC007DFF50 /* Debug */,

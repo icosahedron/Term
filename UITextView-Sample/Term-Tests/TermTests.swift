@@ -1,6 +1,6 @@
 //
-//  UITextView_SampleTests.swift
-//  UITextView-SampleTests
+//  TermTests.swift
+//  TermTests
 //
 //  Created by Jay Kint on 8/10/19.
 //  Copyright © 2019 werks.co. All rights reserved.

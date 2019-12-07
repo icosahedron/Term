@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  UITextView-Sample
+//  Term
 //
 //  Created by Jay Kint on 8/10/19.
 //  Copyright © 2019 werks.co. All rights reserved.
@@ -26,21 +26,17 @@ class TermViewController: UIViewController, UIScrollViewDelegate {
         scrollView.contentSize = view.bounds.inset(by: view.safeAreaInsets).size
         scrollView.contentOffset = CGPoint.zero
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-//        scrollView.translatesAutoresizingMaskIntoConstraints = true
-//        scrollView.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.flexibleWidth.rawValue | UIView.AutoresizingMask.flexibleHeight.rawValue)
         
         termView = TermTextView(frame: view.bounds.inset(by: view.safeAreaInsets), font: defaultFont!)
         termView.backgroundColor = UIColor.lightGray
         termView.translatesAutoresizingMaskIntoConstraints = true
         termView.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.flexibleWidth.rawValue | UIView.AutoresizingMask.flexibleHeight.rawValue)
-//        termView.translatesAutoresizingMaskIntoConstraints = false
 
         // https://stackoverflow.com/questions/5478969/uiscrollview-how-to-draw-content-on-demand
         // talks about how to use a CATiledLayer to draw content on demand, similar to a UITableView does with rows
         // https://medium.com/@ssamadgh/designing-apps-with-scroll-views-part-iii-optimizing-with-tiles-3875535b4114
         scrollView.addSubview(termView)
         view.addSubview(scrollView)
-//        view.addSubview(termView)
 
         // this sets the scroll view to be fully within the safe area of the view controller
         // these resources helped a lot
@@ -60,35 +56,9 @@ class TermViewController: UIViewController, UIScrollViewDelegate {
         let guide = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalToSystemSpacingBelow: guide.topAnchor, multiplier: 1.0),
-//            scrollView.bottomAnchor.constraint(equalToSystemSpacingBelow: guide.bottomAnchor, multiplier: 1.0)
             guide.bottomAnchor.constraint(equalToSystemSpacingBelow: scrollView.bottomAnchor, multiplier: 1.0)
          ])
 
-        // https://stackoverflow.com/a/39945124
-        // use this to set termView to the same width as the scrollView to eliminate horizontal scrolling
-//        termView.bindFrameToSuperviewBounds()
-        
-        // this is used when the KeyboardLayoutGuide is used to set the guidelines instead of the keyboard notifications below
-
-//        let guide = view.safeAreaLayoutGuide
-//        view.keyboardLayoutGuide.usesSafeArea = false
-
-        // for the scrollview layout
-//        NSLayoutConstraint.activate([
-//            scrollView.topAnchor.constraint(equalToSystemSpacingBelow: guide.topAnchor, multiplier: 1.0),
-//            scrollView.leadingAnchor.constraint(equalToSystemSpacingAfter: guide.leadingAnchor, multiplier: 1.0),
-//            view.keyboardLayoutGuide.topAnchor.constraint(equalToSystemSpacingBelow: self.scrollView.bottomAnchor, multiplier: 1.0),
-//            guide.trailingAnchor.constraint(equalToSystemSpacingAfter: self.scrollView.trailingAnchor, multiplier: 1.0)
-//            ])
-
-//        NSLayoutConstraint.activate([
-//            termView.topAnchor.constraint(equalToSystemSpacingBelow: guide.topAnchor, multiplier: 1.0),
-//            termView.leadingAnchor.constraint(equalToSystemSpacingAfter: guide.leadingAnchor, multiplier: 1.0),
-//            view.keyboardLayoutGuide.topAnchor.constraint(equalToSystemSpacingBelow: self.termView.bottomAnchor, multiplier: 1.0),
-//            guide.trailingAnchor.constraint(equalToSystemSpacingAfter: self.termView.trailingAnchor, multiplier: 1.0)
-//            ])
-
-//        self.termView.becomeFirstResponder()
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
@@ -111,11 +81,9 @@ class TermViewController: UIViewController, UIScrollViewDelegate {
         print("Will Transition to size \(size) from super view size \(view.frame.size)")
         detectOrientation()
         view.layoutSubviews()
-        scrollView.contentSize = size
         scrollView.setNeedsLayout()
         scrollView.setNeedsDisplay()
         termView.setNeedsDisplay()
-//        termView.resize(size)
     }
     
     func detectOrientation() {
@@ -134,6 +102,7 @@ class TermViewController: UIViewController, UIScrollViewDelegate {
         }
         scrollView.contentSize = termView.bounds.size
         print("Set scrollView.contentSize = \(termView.bounds.size)")
+        termView.resize(termView.bounds.size)
     }
     
     @objc func adjustForKeyboard(notification: Notification) {

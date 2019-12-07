@@ -1,6 +1,6 @@
 //
 //  TermTextView.swift
-//  UITextView-Sample
+//  Term
 //
 //  Created by Jay Kint on 11/30/19.
 //  Copyright © 2019 werks.co. All rights reserved.

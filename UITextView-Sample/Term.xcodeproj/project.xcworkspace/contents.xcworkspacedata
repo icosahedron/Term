@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:UITextView-Sample.xcodeproj">
+      location = "self:/Users/jaykint/Projects/UITextView/UITextView-Sample/Term.xcodeproj">
    </FileRef>
 </Workspace>
