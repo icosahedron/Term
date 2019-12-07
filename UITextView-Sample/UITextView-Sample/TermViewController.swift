@@ -21,13 +21,15 @@ class TermViewController: UIViewController, UIScrollViewDelegate {
         
         // https://www.appcoda.com/uiscrollview-introduction/
         // UIScrollView introduction
-        scrollView = UIScrollView(frame: view.bounds)
+        scrollView = UIScrollView(frame: view.bounds.inset(by: view.safeAreaInsets))
         scrollView.backgroundColor = UIColor.green
-        scrollView.contentSize = view.bounds.size
+        scrollView.contentSize = view.bounds.inset(by: view.safeAreaInsets).size
         scrollView.contentOffset = CGPoint.zero
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-
-        termView = TermTextView(frame: view.bounds, font: defaultFont!)
+//        scrollView.translatesAutoresizingMaskIntoConstraints = true
+//        scrollView.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.flexibleWidth.rawValue | UIView.AutoresizingMask.flexibleHeight.rawValue)
+        
+        termView = TermTextView(frame: view.bounds.inset(by: view.safeAreaInsets), font: defaultFont!)
         termView.backgroundColor = UIColor.lightGray
         termView.translatesAutoresizingMaskIntoConstraints = true
         termView.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.flexibleWidth.rawValue | UIView.AutoresizingMask.flexibleHeight.rawValue)
@@ -39,7 +41,7 @@ class TermViewController: UIViewController, UIScrollViewDelegate {
         scrollView.addSubview(termView)
         view.addSubview(scrollView)
 //        view.addSubview(termView)
-        
+
         // this sets the scroll view to be fully within the safe area of the view controller
         // these resources helped a lot
         // https://useyourloaf.com/blog/safe-area-layout-guide/
@@ -49,16 +51,35 @@ class TermViewController: UIViewController, UIScrollViewDelegate {
         // The thing to remember is that these are equations, not assignments, which is why the guide is
         // equal to the textView in bottom and trailing.  Reversed, these go beyond the bottom and trailing
         // edges.
+        // This code came from https://stackoverflow.com/a/46318300 and it seems to work really well.
+        let margins = view.layoutMarginsGuide
+        NSLayoutConstraint.activate([
+           scrollView.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
+           scrollView.trailingAnchor.constraint(equalTo: margins.trailingAnchor)
+        ])
         let guide = view.safeAreaLayoutGuide
-        view.keyboardLayoutGuide.usesSafeArea = false
-
-        // for the scrollview layout
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalToSystemSpacingBelow: guide.topAnchor, multiplier: 1.0),
-            scrollView.leadingAnchor.constraint(equalToSystemSpacingAfter: guide.leadingAnchor, multiplier: 1.0),
-            view.keyboardLayoutGuide.topAnchor.constraint(equalToSystemSpacingBelow: self.scrollView.bottomAnchor, multiplier: 1.0),
-            guide.trailingAnchor.constraint(equalToSystemSpacingAfter: self.scrollView.trailingAnchor, multiplier: 1.0)
-            ])
+//            scrollView.bottomAnchor.constraint(equalToSystemSpacingBelow: guide.bottomAnchor, multiplier: 1.0)
+            guide.bottomAnchor.constraint(equalToSystemSpacingBelow: scrollView.bottomAnchor, multiplier: 1.0)
+         ])
+
+        // https://stackoverflow.com/a/39945124
+        // use this to set termView to the same width as the scrollView to eliminate horizontal scrolling
+//        termView.bindFrameToSuperviewBounds()
+        
+        // this is used when the KeyboardLayoutGuide is used to set the guidelines instead of the keyboard notifications below
+
+//        let guide = view.safeAreaLayoutGuide
+//        view.keyboardLayoutGuide.usesSafeArea = false
+
+        // for the scrollview layout
+//        NSLayoutConstraint.activate([
+//            scrollView.topAnchor.constraint(equalToSystemSpacingBelow: guide.topAnchor, multiplier: 1.0),
+//            scrollView.leadingAnchor.constraint(equalToSystemSpacingAfter: guide.leadingAnchor, multiplier: 1.0),
+//            view.keyboardLayoutGuide.topAnchor.constraint(equalToSystemSpacingBelow: self.scrollView.bottomAnchor, multiplier: 1.0),
+//            guide.trailingAnchor.constraint(equalToSystemSpacingAfter: self.scrollView.trailingAnchor, multiplier: 1.0)
+//            ])
 
 //        NSLayoutConstraint.activate([
 //            termView.topAnchor.constraint(equalToSystemSpacingBelow: guide.topAnchor, multiplier: 1.0),
@@ -68,6 +89,9 @@ class TermViewController: UIViewController, UIScrollViewDelegate {
 //            ])
 
 //        self.termView.becomeFirstResponder()
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -83,6 +107,7 @@ class TermViewController: UIViewController, UIScrollViewDelegate {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
+        let size = CGRect(origin: CGPoint.zero, size: size).inset(by: view.safeAreaInsets).size
         print("Will Transition to size \(size) from super view size \(view.frame.size)")
         detectOrientation()
         view.layoutSubviews()
@@ -90,7 +115,7 @@ class TermViewController: UIViewController, UIScrollViewDelegate {
         scrollView.setNeedsLayout()
         scrollView.setNeedsDisplay()
         termView.setNeedsDisplay()
-        termView.resize(size)
+//        termView.resize(size)
     }
     
     func detectOrientation() {
@@ -107,6 +132,28 @@ class TermViewController: UIViewController, UIScrollViewDelegate {
             firstLayout = false
             detectOrientation()
         }
+        scrollView.contentSize = termView.bounds.size
+        print("Set scrollView.contentSize = \(termView.bounds.size)")
     }
+    
+    @objc func adjustForKeyboard(notification: Notification) {
+
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+
+        let keyboardScreenEndFrame = keyboardValue.cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+
+        if notification.name == UIResponder.keyboardWillHideNotification {
+            scrollView.contentInset = .zero
+        } else {
+            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height - view.safeAreaInsets.bottom, right: 0)
+        }
+
+        scrollView.scrollIndicatorInsets = scrollView.contentInset
+
+//        let selectedRange = yourTextView.selectedRange
+//        yourTextView.scrollRangeToVisible(selectedRange)
+    }
+
 }
 

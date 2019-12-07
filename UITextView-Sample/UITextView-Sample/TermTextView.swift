@@ -19,9 +19,15 @@ class TermTextView : UIView, UIKeyInput {
     private var _margins : CGSize
     private var _cursor : CGPoint
     private var _font : UIFont
+    private var _toolBar : UIToolbar
     
     public var hasText: Bool = false;
     
+    public override var inputAccessoryView: UIView? {
+        get {
+            return _toolBar
+        }
+    }
     public override var canBecomeFirstResponder : Bool {
         get { print("canBecomeFirstResponder"); return true }
     }
@@ -37,11 +43,11 @@ class TermTextView : UIView, UIKeyInput {
         _scale = CGSize.zero
         _font = font
         _margins = CGSize.zero
-        
+        _toolBar = UIToolbar()
+
         super.init(frame: frame)
         
         backgroundColor = UIColor.blue
-//        layer.isGeometryFlipped = true
         recalcDimensions()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tap))
@@ -50,6 +56,10 @@ class TermTextView : UIView, UIKeyInput {
         addGestureRecognizer(tapGesture)
         
         isUserInteractionEnabled = true;
+        
+        let button = UIBarButtonItem(title: "Stupid", style: .plain, target: self, action: #selector(testInputAccessory))
+        _toolBar.items = [button]
+        _toolBar.sizeToFit()
     }
     
     @objc
@@ -121,11 +131,6 @@ class TermTextView : UIView, UIKeyInput {
         let context = UIGraphicsGetCurrentContext()!
         UIGraphicsPushContext(context)
         
-//        context.textMatrix = .identity
-//        context.translateBy(x: 0, y: bounds.size.height)
-//        context.scaleBy(x: 1.0, y: -1.0)
-        
-//        string.draw(at: CGPoint(x: 0, y: 0))
         drawString(x: 1, y: 1, str: "Hello, world")
         
         UIGraphicsPopContext()
@@ -139,6 +144,30 @@ class TermTextView : UIView, UIKeyInput {
     public func deleteBackward() {
         print("deleteBackward")
         return
+    }
+    
+    @objc
+    public func testInputAccessory(send: UIBarButtonItem) {
+        print("input accessory view button pressed")
+    }
+}
+
+extension UIView {
+
+    /// Adds constraints to this `UIView` instances `superview` object to make sure this always has the same size as the superview.
+    /// Please note that this has no effect if its `superview` is `nil` – add this `UIView` instance as a subview before calling this.
+    func bindFrameToSuperviewBounds() {
+        guard let superview = self.superview else {
+            print("Error! `superview` was nil – call `addSubview(view: UIView)` before calling `bindFrameToSuperviewBounds()` to fix this.")
+            return
+        }
+
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.topAnchor.constraint(equalTo: superview.topAnchor, constant: 0).isActive = true
+        self.bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: 0).isActive = true
+        self.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 0).isActive = true
+        self.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: 0).isActive = true
+
     }
 }
 
