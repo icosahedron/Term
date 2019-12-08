@@ -19,6 +19,7 @@ class TermTextView : UIView, UIKeyInput {
     private var _margins : CGSize
     private var _cursor : CGPoint
     private var _font : UIFont
+    private var _cgFont : CGFont
     private var _toolBar : UIToolbar
     
     public var hasText: Bool = false;
@@ -28,6 +29,7 @@ class TermTextView : UIView, UIKeyInput {
             return _toolBar
         }
     }
+    
     public override var canBecomeFirstResponder : Bool {
         get { print("canBecomeFirstResponder"); return true }
     }
@@ -44,7 +46,8 @@ class TermTextView : UIView, UIKeyInput {
         _font = font
         _margins = CGSize.zero
         _toolBar = UIToolbar()
-
+        _cgFont = CGFont(font.fontName as CFString)!
+        
         super.init(frame: frame)
         
         backgroundColor = UIColor.blue
@@ -99,6 +102,7 @@ class TermTextView : UIView, UIKeyInput {
         }
         set(value) {
             self._font = value
+            self._cgFont = CGFont(value.fontName as CFString)!
             self.recalcDimensions()
         }
     }
@@ -113,16 +117,16 @@ class TermTextView : UIView, UIKeyInput {
         let heightDiff = (bounds.height - self._dim.height * self._scale.height) / 2.0
         self._margins = CGSize(width: widthDiff, height: heightDiff)
         print("\(self._dim.width) x \(self._dim.height)")
-        let first = self.isFirstResponder
-        print("isFirstResponder = \(first)")
     }
-    
-    private func drawString(x: Int, y: Int, str: String) {
-        let string = NSAttributedString(string: str, attributes: [NSAttributedString.Key.font: font])
-        let pt_x = CGFloat(x) * self._scale.width + self._margins.width
-        let pt_y = CGFloat(y) * self._scale.height + self._margins.height
-        string.draw(at: CGPoint(x: pt_x, y: pt_y))
-        print("drawString: x: \(x) y: \(y) pt_x: \(pt_x) pt_y: \(pt_y)")
+     
+    private func drawString(at: CGPoint, str: String) {
+        let pt_x = CGFloat(at.x) * self._scale.width + self._margins.width
+        let pt_y = CGFloat(at.y) * self._scale.height + self._margins.height
+        // for the terminal, we will want to use the following attributes: .font, .foregroundColor, .backgroundColor, .paragraphStyle.lineBreakMode
+        // .strokeWidth for bold (~-5.0 to -7.0 looks good), .obliqueness for italics, .underlineStyle (set to 1.0 for single)
+        let attr = [NSAttributedString.Key.font : self._font, NSAttributedString.Key.obliqueness : 0.25] as [NSAttributedString.Key : Any]
+        str.draw(at: CGPoint(x: pt_x, y: pt_y), withAttributes: attr)
+        print("drawString: x: \(at.x) y: \(at.y) pt_x: \(pt_x) pt_y: \(pt_y)")
     }
     
     public override func draw(_ rect: CGRect) {
@@ -131,7 +135,10 @@ class TermTextView : UIView, UIKeyInput {
         let context = UIGraphicsGetCurrentContext()!
         UIGraphicsPushContext(context)
         
-        drawString(x: 1, y: 1, str: "Hello, world")
+        context.setFont(self._cgFont)
+        context.setFontSize(15.0)
+        
+        drawString(at: CGPoint(x: 1, y: 1), str: "Hello, world")
         
         UIGraphicsPopContext()
     }
@@ -167,7 +174,6 @@ extension UIView {
         self.bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: 0).isActive = true
         self.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 0).isActive = true
         self.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: 0).isActive = true
-
     }
 }
 
