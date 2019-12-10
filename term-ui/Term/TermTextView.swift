@@ -21,6 +21,7 @@ class TermTextView : UIView, UIKeyInput {
     private var _font : UIFont
     private var _cgFont : CGFont
     private var _toolBar : UIToolbar
+    private let defaultParagraphStyle : NSParagraphStyle
     
     public var hasText: Bool = false;
     
@@ -38,6 +39,17 @@ class TermTextView : UIView, UIKeyInput {
         get { print("canResignFirstResponder"); return true }
     }
     
+    public override var keyCommands: [UIKeyCommand]? {
+        get {
+            return [UIKeyCommand(input: UIKeyCommand.inputEscape, modifierFlags: [], action: #selector(esc))]
+        }
+    }
+    
+    @objc
+    public func esc(_ keyCommand: UIKeyCommand?) {
+        print("ESC")
+    }
+    
     public init(frame: CGRect, font : UIFont) {
         
         _cursor = CGPoint(x:0, y:0)
@@ -47,6 +59,9 @@ class TermTextView : UIView, UIKeyInput {
         _margins = CGSize.zero
         _toolBar = UIToolbar()
         _cgFont = CGFont(font.fontName as CFString)!
+        let defaultParagraphStyle = NSMutableParagraphStyle()
+        defaultParagraphStyle.lineBreakMode = NSLineBreakMode.byCharWrapping
+        self.defaultParagraphStyle = defaultParagraphStyle.copy() as! NSParagraphStyle
         
         super.init(frame: frame)
         
@@ -124,7 +139,9 @@ class TermTextView : UIView, UIKeyInput {
         let pt_y = CGFloat(at.y) * self._scale.height + self._margins.height
         // for the terminal, we will want to use the following attributes: .font, .foregroundColor, .backgroundColor, .paragraphStyle.lineBreakMode
         // .strokeWidth for bold (~-5.0 to -7.0 looks good), .obliqueness for italics, .underlineStyle (set to 1.0 for single)
-        let attr = [NSAttributedString.Key.font : self._font, NSAttributedString.Key.obliqueness : 0.25] as [NSAttributedString.Key : Any]
+        let attr = [NSAttributedString.Key.font : self._font,
+                    NSAttributedString.Key.paragraphStyle: self.defaultParagraphStyle,
+                    NSAttributedString.Key.obliqueness : 0.25] as [NSAttributedString.Key : Any]
         str.draw(at: CGPoint(x: pt_x, y: pt_y), withAttributes: attr)
         print("drawString: x: \(at.x) y: \(at.y) pt_x: \(pt_x) pt_y: \(pt_y)")
     }
@@ -144,8 +161,11 @@ class TermTextView : UIView, UIKeyInput {
     }
     
     public func insertText(_ text: String) {
-        print(text)
-        return
+        for element in text.unicodeScalars {
+            let unicode = element.value
+            print(unicode, terminator: "")
+            print(",", terminator: "")
+        }
     }
     
     public func deleteBackward() {
