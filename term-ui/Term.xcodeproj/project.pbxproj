@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3205024623AF2226004C1D3E /* libxterm_rs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3205024423AF2119004C1D3E /* libxterm_rs.a */; };
+		3205024823B06183004C1D3E /* extern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205024723B06183004C1D3E /* extern.swift */; };
+		3213509B23C04220000F8308 /* BugfenderSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3213509A23C04220000F8308 /* BugfenderSDK.framework */; };
+		3213509D23C0423D000F8308 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3213509C23C0423D000F8308 /* libc++.tbd */; };
+		3213509F23C04244000F8308 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3213509E23C04244000F8308 /* SystemConfiguration.framework */; };
+		321350A123C04287000F8308 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 321350A023C04287000F8308 /* Security.framework */; };
+		321350A323C04296000F8308 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 321350A223C04296000F8308 /* MobileCoreServices.framework */; };
+		321350A523C0429E000F8308 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 321350A423C0429E000F8308 /* CoreGraphics.framework */; };
+		321350A723C04686000F8308 /* Bugfender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321350A623C04686000F8308 /* Bugfender.swift */; };
 		321D5D612392F73F00385628 /* TermTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321D5D602392F73F00385628 /* TermTextView.swift */; };
 		32A3270A22FF3BDB007DFF50 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A3270922FF3BDB007DFF50 /* AppDelegate.swift */; };
 		32A3270C22FF3BDB007DFF50 /* TermViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A3270B22FF3BDB007DFF50 /* TermViewController.swift */; };
@@ -30,6 +39,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3205024423AF2119004C1D3E /* libxterm_rs.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libxterm_rs.a; path = "../term-model/target/universal/debug/libxterm_rs.a"; sourceTree = "<group>"; };
+		3205024723B06183004C1D3E /* extern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extern.swift; sourceTree = "<group>"; };
+		3213509A23C04220000F8308 /* BugfenderSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BugfenderSDK.framework; path = Carthage/Build/iOS/BugfenderSDK.framework; sourceTree = "<group>"; };
+		3213509C23C0423D000F8308 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		3213509E23C04244000F8308 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		321350A023C04287000F8308 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		321350A223C04296000F8308 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		321350A423C0429E000F8308 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		321350A623C04686000F8308 /* Bugfender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bugfender.swift; sourceTree = "<group>"; };
 		321D5D602392F73F00385628 /* TermTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermTextView.swift; sourceTree = "<group>"; };
 		32A3270622FF3BDB007DFF50 /* Term.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Term.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32A3270922FF3BDB007DFF50 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +69,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				321350A523C0429E000F8308 /* CoreGraphics.framework in Frameworks */,
+				321350A323C04296000F8308 /* MobileCoreServices.framework in Frameworks */,
+				321350A123C04287000F8308 /* Security.framework in Frameworks */,
+				3213509F23C04244000F8308 /* SystemConfiguration.framework in Frameworks */,
+				3213509D23C0423D000F8308 /* libc++.tbd in Frameworks */,
+				3213509B23C04220000F8308 /* BugfenderSDK.framework in Frameworks */,
+				3205024623AF2226004C1D3E /* libxterm_rs.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,12 +89,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3205024323AF2119004C1D3E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				321350A423C0429E000F8308 /* CoreGraphics.framework */,
+				321350A223C04296000F8308 /* MobileCoreServices.framework */,
+				321350A023C04287000F8308 /* Security.framework */,
+				3213509E23C04244000F8308 /* SystemConfiguration.framework */,
+				3213509C23C0423D000F8308 /* libc++.tbd */,
+				3213509A23C04220000F8308 /* BugfenderSDK.framework */,
+				3205024423AF2119004C1D3E /* libxterm_rs.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		32A326FD22FF3BDB007DFF50 = {
 			isa = PBXGroup;
 			children = (
 				32A3270822FF3BDB007DFF50 /* Term */,
 				32A3271D22FF3BDC007DFF50 /* Term-Tests */,
 				32A3270722FF3BDB007DFF50 /* Products */,
+				3205024323AF2119004C1D3E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -95,6 +135,8 @@
 				32A3271222FF3BDC007DFF50 /* LaunchScreen.storyboard */,
 				32A3271522FF3BDC007DFF50 /* Info.plist */,
 				32A327292300DD82007DFF50 /* Editor.storyboard */,
+				3205024723B06183004C1D3E /* extern.swift */,
+				321350A623C04686000F8308 /* Bugfender.swift */,
 			);
 			path = Term;
 			sourceTree = "<group>";
@@ -219,7 +261,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3205024823B06183004C1D3E /* extern.swift in Sources */,
 				32A3270C22FF3BDB007DFF50 /* TermViewController.swift in Sources */,
+				321350A723C04686000F8308 /* Bugfender.swift in Sources */,
 				321D5D612392F73F00385628 /* TermTextView.swift in Sources */,
 				32A3270A22FF3BDB007DFF50 /* AppDelegate.swift in Sources */,
 				32A3273023012AEB007DFF50 /* Keyboard+LayoutGuide.swift in Sources */,
@@ -384,15 +428,23 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_LINK_OBJC_RUNTIME = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DHHJAAR6WK;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = Term/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = "../term-model/target/universal/debug";
 				PRODUCT_BUNDLE_IDENTIFIER = co.werks.term;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "../term-model/xterm_rs.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -402,15 +454,23 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_LINK_OBJC_RUNTIME = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DHHJAAR6WK;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = Term/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = "../term-model/target/universal/debug";
 				PRODUCT_BUNDLE_IDENTIFIER = co.werks.term;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "../term-model/xterm_rs.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

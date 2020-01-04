@@ -8,16 +8,23 @@
 
 import UIKit
 
+// For some reason these have to be defined here.  If they are defined
+// in another file, the error "duplicate symbols" occurs. It's like the
+// use here of one of these functions defines the function unless the
+// function is also in this file. :(
+
+
 class TermViewController: UIViewController, UIScrollViewDelegate {
     
     var scrollView : UIScrollView!
     var termView : TermTextView!
     var firstLayout : Bool = true
+    var msg : String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
                 
-        let defaultFont = UIFont(name: "Menlo", size: 14.0)
+        let defaultFont = UIFont(name: "Menlo", size: 20.0)
         
         // https://www.appcoda.com/uiscrollview-introduction/
         // UIScrollView introduction
@@ -26,6 +33,7 @@ class TermViewController: UIViewController, UIScrollViewDelegate {
         scrollView.contentSize = view.bounds.inset(by: view.safeAreaInsets).size
         scrollView.contentOffset = CGPoint.zero
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.delegate = self
         
         termView = TermTextView(frame: view.bounds.inset(by: view.safeAreaInsets), font: defaultFont!)
         termView.backgroundColor = UIColor.lightGray
@@ -114,7 +122,8 @@ class TermViewController: UIViewController, UIScrollViewDelegate {
 
         if notification.name == UIResponder.keyboardWillHideNotification {
             scrollView.contentInset = .zero
-        } else {
+        }
+        else {
             scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height - view.safeAreaInsets.bottom, right: 0)
         }
 
@@ -123,6 +132,12 @@ class TermViewController: UIViewController, UIScrollViewDelegate {
 //        let selectedRange = yourTextView.selectedRange
 //        yourTextView.scrollRangeToVisible(selectedRange)
     }
-
+    
+    // MARK: - ScrollView delegate
+    
+    @objc
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print("Scrolled to \(scrollView.contentOffset)")
+    }
 }
 

@@ -8,18 +8,47 @@
 
 import UIKit
 
+@_exported import BugfenderSDK
+
+@_cdecl("term_log")
+public func term_log(_ msg: UnsafePointer<Int8>?, _ len: UInt32) {
+    if let cString = msg {
+        let str = String(cString: cString)
+        bfprint(str)
+    }
+}
+
+@_cdecl("term_alloc")
+public func term_alloc(_ size: UInt32) -> UnsafeMutablePointer<UInt8>? {
+    return nil;
+}
+
+@_cdecl("term_free")
+public func term_free(_ ptr: UnsafeMutablePointer<UInt8>?) {
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = TermViewController();
         window?.makeKeyAndVisible()
-
+        
+        Bugfender.activateLogger("n3g1p0LO4Q1iZ911AElk5jHBFPUlLSsl")
+        Bugfender.enableCrashReporting()
+//        Bugfender.enableUIEventLogging()  // optional, log user interactions automatically
+        Bugfender.setPrintToConsole(true)
+        
+        bfprint("Hello from Web Assemby Shell")
+        
+        term_lib_init(term_alloc, term_free, term_log)
+        
+//        term_(term)
+        
         return true
     }
 

@@ -138,10 +138,10 @@ class TermTextView : UIView, UIKeyInput {
         let pt_x = CGFloat(at.x) * self._scale.width + self._margins.width
         let pt_y = CGFloat(at.y) * self._scale.height + self._margins.height
         // for the terminal, we will want to use the following attributes: .font, .foregroundColor, .backgroundColor, .paragraphStyle.lineBreakMode
-        // .strokeWidth for bold (~-5.0 to -7.0 looks good), .obliqueness for italics, .underlineStyle (set to 1.0 for single)
+        // .strokeWidth for bold (~-5.0 to -7.0 looks good), .obliqueness for italics (0.25 looks good), .underlineStyle (set to 1.0 for single)
         let attr = [NSAttributedString.Key.font : self._font,
-                    NSAttributedString.Key.paragraphStyle: self.defaultParagraphStyle,
-                    NSAttributedString.Key.obliqueness : 0.25] as [NSAttributedString.Key : Any]
+                    NSAttributedString.Key.paragraphStyle: self.defaultParagraphStyle] //,
+//                    NSAttributedString.Key.obliqueness : 0.25] as [NSAttributedString.Key : Any]
         str.draw(at: CGPoint(x: pt_x, y: pt_y), withAttributes: attr)
         print("drawString: x: \(at.x) y: \(at.y) pt_x: \(pt_x) pt_y: \(pt_y)")
     }
@@ -155,7 +155,7 @@ class TermTextView : UIView, UIKeyInput {
         context.setFont(self._cgFont)
         context.setFontSize(15.0)
         
-        drawString(at: CGPoint(x: 1, y: 1), str: "Hello, world")
+        drawString(at: CGPoint(x: 1, y: 1), str: "Hello, world \u{1F614}\u{1F64B}\u{1F3FC}")
         
         UIGraphicsPopContext()
     }
