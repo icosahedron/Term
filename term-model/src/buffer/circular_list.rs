@@ -3,6 +3,7 @@
 use std::cmp;
 use std::default::Default;
 use std::mem;
+use std::ops::Index;
 
 // pub struct DeleteEvent {
 //     index: usize,
@@ -145,6 +146,15 @@ impl<T> CircularList<T> where T : Default {
 //     trimStart(count: number): void;
 //     NOT used by the buffer
 //     shiftElements(start: number, count: number, offset: number): void;
+}
+
+impl<T> Index<usize> for CircularList<T> where T : Default {
+
+    type Output = T;
+
+    fn index(&self, row: usize) -> &Self::Output {
+        &self.array.get(self.get_cyclic_index(row)).unwrap()
+    }
 }
 
 #[cfg(test)]
@@ -346,4 +356,24 @@ mod tests {
         assert_eq!(*(list.get(2).unwrap()), "2".to_string());
         assert_eq!(*(list.get(3).unwrap()), "3".to_string());
     }
+
+    #[test]
+    fn test_index_trait() {
+        let mut list : CircularList<u32> = CircularList::with_capacity(3);
+        list.push(1);
+        let cind = list[0];
+        assert_eq!(cind, 0);
+        list.push(2);
+        let cind = list[1];
+        assert_eq!(cind, 1);
+        list.push(3);
+        let cind = list[2];
+        assert_eq!(cind, 2);
+        list.push(4);
+        let cind = list[2];
+        assert_eq!(cind, 0);
+        assert_eq!(list.length, 3);
+        assert_eq!(list.start_index, 1);
+    }
+
 }

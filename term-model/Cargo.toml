@@ -11,4 +11,3 @@ crate-type = ['staticlib']
 readonly = "0.1"
 lazy_static = "1.4.0"
 log = "^0.4.8"
-

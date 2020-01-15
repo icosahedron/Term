@@ -6,6 +6,7 @@ mod term_log;
 
 #[macro_use]
 use log::*;
+use crate::buffer::Buffer;
 
 #[macro_use]
 extern crate lazy_static;
@@ -14,14 +15,21 @@ static mut ALLOC_CALLBACK : Option<extern fn (u32) -> *mut u8> = None;
 static mut FREE_CALLBACK : Option<extern fn (*mut u8)> = None;
 
 struct Term {
+    buffer: Buffer,
 }
 
 impl Term {
-    fn new() -> Self {
-        Term { }
+    fn new(width: u32, height: u32) -> Self {
+        Term { buffer: Buffer::new(height, width) }
+    }
+
+    fn write(&self, buf: *const u8, len: u32) -> u32 {
+        unsafe {
+            let vbuf = Vec::from_raw_parts(buf as *mut u8, len as usize, len as usize);
+            self.buffer.write(vbuf.as_slice())
+        }
     }
 }
-
 
 #[no_mangle]
 pub extern fn term_lib_init(allocfn: extern fn (c_uint) -> *mut u8,
@@ -37,9 +45,9 @@ pub extern fn term_lib_init(allocfn: extern fn (c_uint) -> *mut u8,
 }
 
 #[no_mangle]
-pub extern fn term_new() -> usize {
+pub extern fn term_new(width: u32, height: u32) -> usize {
     info!("term_new");
-    Box::into_raw(Box::new(Term::new())) as usize
+    Box::into_raw(Box::new(Term::new(width, height))) as usize
 }
 
 #[no_mangle]
@@ -47,6 +55,7 @@ pub extern fn term_drop(term: usize) {
     unsafe {
         let term = Box::from_raw(term as *mut Term);
         info!("term_drop");
+//        let term = term as *mut Term;
         drop(term);
     }
 }
